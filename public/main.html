@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Grid CSS -->
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" type="text/css" href="css/component.css">
+    <!-- 	<script src="js/modernizr.custom.js"></script> -->
+    <!-- Menu Modal -->
+    <link rel="stylesheet" href="css/menumodal.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Railway" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/main.css" media="screen" title="no title">
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- Chat Slide Out -->
+
+    <nav class="navbar navbar-light bg-light justify-content-between">
+
+        <span id="chatText" style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776; chat</span>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <!-- Chat -->
+            <div id="chatBox">
+                <form class="chatForm">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id='messagesDiv' class="msg-wrapper"></div>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="textboxes">
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <span class="error"></span>
+                                <label>
+                                    <br>
+                                    <input type="text" id='nameInput' placeholder='Name' />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>
+                                    <br>
+                                    <textarea id='messageInput' placeholder='Message'></textarea>
+                                    <input type="submit" value="Submit" id="submit">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="input-group" id="search-form">
+            <input type="text" class="form-control" aria-label="...">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" id="search-submit"><span
+                        class="glyphicon glyphicon-search"></span></button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span> <span
+                        class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right" id="advancedOptions">
+
+                    <li role="separator" class="divider"></li>
+
+                    <li role="separator" class="divider"></li>
+
+                    <li id="advDate">
+                        Search Dates (start date, stop date) <br><br>
+                        <input type="date" class="form-control" id="startDate" placeholder="Start Date">
+                        <input type="date" class="form-control" id="endDate" placeholder="End Date">
+
+                    </li>
+                </ul>
+            </div>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" area-expanded="false"><span class="glyphicon glyphicon-user"></span></button>
+                <ul class="dropdown-menu" id="userInfo">
+                    <li id="profileName" class="text-center">Username</li> <br><br>
+                    <li id="profilePic" class="text-center">Pic</li>
+                    <li role="separator" class="divider"></li>
+                    <form method="get" action="/logout">
+                        <button id="logoutbutton">log-out</button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+
+        <h1 id="title">
+            <a href="/main" id="headerText">The Menu</a>
+        </h1>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <!-- Nav -->
+        <ul class="nav nav-tabs nav-justified">
+            <li role="presentation"><a class="navLinks" id="findAResturant"> Find A Resturant </a></li>
+            <li role="presentation"><a class="navLinks" id="findAMeal"> Find a Meal </a></li>
+            <li role="presentation"><a class="navLinks" id="MyResturant"> My Resturants </a></li>
+            <li role="presentation"><a class="navLinks" id="MyMeals"> My Meals </a></li>
+            <li role="presentation"><a class="navLinks" id="LogIn"> Log In </a></li>
+            <li role="presentation"><a class="navLinks" id="SignUp"> Sign Up </a></li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12" id="topArticles">
+                <div class="panel">
+                    <div class="panel-body" id="div-section">
+                        <!-- ============================================================================= -->
+                        <!-- Grid -->
+                        <div class="container" id="gridContainer">
+                            <h1 class="text-center">Top Activites</h1>
+
+
+                            <div class="main">
+                                <ul id="og-grid" class="og-grid">
+                                    <div id="two" class="button">
+                                        <a href="#">
+                                            <div class="tileContent tile1">
+                                                <p class="tileTitle">Recent Reviews</p>
+                                                <p class="name">name</p>
+                                                <p class="review">review</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="two" class="button">
+                                        <a href="#">
+                                            <div class="tileContent tile2">
+                                                <p class="tileTitle">Recent Reviews</p>
+                                                <p class="name">name</p>
+                                                <p class="review">review</p>
+                                            </div>
+                                    </div>
+                                    </a>
+                            </div>
+                            <div id="two" class="button">
+                                <a href="#">
+                                    <div class="tileContent tile3">
+                                        <p class="tileTitle">Recent Reviews</p>
+                                        <p class="name">name</p>
+                                        <p class="review">review</p>
+                                    </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div id="two" class="button">
+                            <a href="#">
+                                <div class="tileContent tile4">
+                                    <p class="tileTitle">Recent Reviews</p>
+                                    <p class="name">name</p>
+                                    <p class="review">review</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="two" class="button">
+                            <a href="#">
+                                <div class="tileContent tile5">
+                                    <p class="tileTitle">Recent Reviews</p>
+                                    <p class="name">name</p>
+                                    <p class="review">review</p>
+                                </div>
+                            </a>
+                        </div>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
