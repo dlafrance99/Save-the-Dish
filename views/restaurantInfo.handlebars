@@ -1,6 +1,11 @@
 <h1>{{restaurantinfo.restaurant_name}}</h1>
 <h3>{{restaurantinfo.city}}, {{restaurantinfo.state}}</h3>
 
+<button data-name="{{restaurantinfo.restaurant_name}}" data-id="{{restaurantinfo.id}}" id="rateRestaurant">Rate this Restaurant</button>
+
+<button id="RateMeal" data-id="{{restaurantinfo.id}}" data-name="{{restaurantinfo.restaurant_name}}">Rate a meal from this
+    restaurant</button>
+
 <div class="restaurantRatings">
     
     <h4>Restaurant Reviews</h4>
@@ -17,10 +22,13 @@
         {{/each}}
     </ul>
 
-    <h4>Menu Items</h4>
+    <h4>Menu Reviews</h4>
     <ul>
         {{#each restaurantinfo.Meals}}
-        <li>{{menu_item}}</li>
+        <li>{{this.menu_item}}</li>
+            <p>rating: {{this.rating}}</p>
+            <p>pros: {{this.pros}}</p>
+            <p>cons: {{this.cons}}</p>
         {{/each}}
     </ul>
 </div>

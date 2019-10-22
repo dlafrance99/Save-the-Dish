@@ -24,8 +24,8 @@ app.set("view engine", "handlebars");
 
 // routes
 
-require("./routes/restaurant-api-routes.js")(app);
 require("./routes/htmlRoutes")(app);
+require("./routes/restaurant-api-routes.js")(app);
 require("./routes/meal-api-routes")(app);
 require("./routes/restaurant-rating-api")(app);
 require("./routes/api-routes.js")(app);

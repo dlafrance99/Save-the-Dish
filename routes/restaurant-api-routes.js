@@ -9,6 +9,7 @@ module.exports = function(app) {
             rating: req.body.rating,
             comment: req.body.comment
         }).then(function(data){
+            console.log("This is the data I want" + data)
             res.json(data);
         })
     })
