@@ -1,0 +1,21 @@
+<h1>
+    Meal Ratings for {{meals.restaurant}}
+</h1>
+
+<a href="/">Home</a>
+<a href="/addRestaurant">Add a restaurant</a>
+<a href="/allRestaurants">All Restaurants</a>
+
+<ul>
+    {{#each meals}}
+        <li>
+            {{this.menu_item}}
+            <br>
+            Rating: {{this.rating}}
+            <br>
+            pros: {{this.pros}}
+            <br>
+            cons: {{this.cons}}
+        </li>
+    {{/each}}
+</ul>
