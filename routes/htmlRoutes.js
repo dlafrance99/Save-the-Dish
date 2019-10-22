@@ -3,8 +3,26 @@ var path = require("path");
 var db = require("../models");
 
 module.exports = function (app) {
+    app.get("/signup", function(req,res){
+        if(req.user){
+            res.redirect("/main");
+        }
+        res.sendFile(path.join(__dirname, "../public/signup.html"))
+    });
+
+    app.get("/login", function(req,res){
+        if(req.user){
+            res.redirect("/main");
+        }
+        res.sendFile(path.join(__dirname, "../public/login.html"))
+    });
+
+    app.get("/main", function(req, res){
+        res.render("index")
+    })
+
     app.get("/", function (req, res) {
-        res.render("index");
+        res.sendFile(path.join(__dirname, "../public/index.html"))
     })
 
     app.get("/addRestaurant", function (req, res) {
