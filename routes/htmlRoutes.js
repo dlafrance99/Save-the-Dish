@@ -78,6 +78,21 @@ module.exports = function (app) {
             })
         })
     })
+
+    app.get("/restaurantInfo/:restaurant", function(req, res){
+        db.Restaurant.findAll({
+            where: {
+                restaurant_name: req.params.restaurant
+            },
+            include: [db.Meal, db.Ratings]
+        }).then(function(data){
+            var data = data[0].dataValues
+            console.log(data.Ratings)
+            res.render("restaurantInfo", {
+                restaurantinfo: data
+            })
+        })
+    })
 }
 
 

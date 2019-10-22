@@ -1,29 +1,31 @@
-<h1>Search for a restaurant</h1>
-
-<a href="/">Home</a>
-<a href="/addRestaurant">Add a restaurant</a>
-<a href="/allRestaurants">All Restaurants</a>
-
-<br>
-
-
-<input type="text" name="searchRestaurant" id="search-restaurant" placeholder="search for a restaurant">
-<button type="submit" id="search-submit">Submit</button>
-
 <h2>
-    Restaurants
+    Search Results
 </h2>
 
 <ol>
     {{#each restaurants}}
-        <li id="restaurant">
-            {{this.restaurant_name}}  
-            <button data-name="{{this.restaurant_name}}" data-id="{{this.id}}" id="rateRestaurant">Rate this Restaurant</button>
-            <button id="RateMeal" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Rate a meal from this restaurant</button>
-            <button id="allRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this restaurant</button>
-            <button id="allMealRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this restaurant</button>
-        </li>
-        
-        <p>{{this.city}}, {{this.state}}</p>
+    <li id="restaurant">
+        <a href="/restaurantInfo/{{this.restaurant_name}}">{{this.restaurant_name}}</a>
+    </li>
+
+    <p>{{this.city}}, {{this.state}}</p>
     {{/each}}
 </ol>
+
+<h2>Didn't find what you were looking for?</h2>
+<h3>
+<a href="/addRestaurant">
+    submit a new restaurant
+</a>
+</h3>
+
+
+
+
+<button data-name="{{this.restaurant_name}}" data-id="{{this.id}}" id="rateRestaurant">Rate this Restaurant</button>
+<button id="RateMeal" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Rate a meal from this
+    restaurant</button>
+<button id="allRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this
+    restaurant</button>
+<button id="allMealRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this
+    restaurant</button>
