@@ -1,0 +1,20 @@
+<h1 id="restaurantInfo" data-name="{{restaurantId.name}}" data-id="{{restaurantId.id}}">Rate {{restaurantId.name}}</h1>
+
+<a href="/">Home</a>
+<a href="/addRestaurant">Add a restaurant</a>
+<a href="/allRestaurants">All Restaurants</a>
+
+<p>Restaurant rating</p>
+<select name="restaurant-rating" id="restaurantRating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
+<p>Restaurant Comment</p>
+<textarea name="restaurant-comment" id="restaurantComment" cols="30" rows="10"
+    placeholder="What do you have to say about this restaurant?"></textarea>
+<br>
+
+<button type="submit" id="resRating-submit">Submit</button>

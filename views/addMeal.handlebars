@@ -1,0 +1,30 @@
+<h1>Meal input</h1>
+
+<a href="/">home</a>
+<a href="/allRestaurants">Search for a Restaurant</a>
+<a href="/addRestaurant">Add a Restaurant</a>
+<a href="/allRestaurants">All Restaurants</a>
+
+<h2 id="restaurantInfo" data-id="{{restaurantid.id}}" data-name="{{restaurantid.name}}">add a meal for {{restaurantid.name}}</h2>
+
+<p>Meal item</p>
+<input type="text" name="meal-item" id="mealItem">
+
+<p>Rating</p>
+<select name="meal-rating" id="mealRating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
+
+<p>Pros</p>
+<textarea name="rating-pros" id="ratingPros" cols="30" rows="10" placeholder="what were the pros?"></textarea>
+
+<p>cons</p>
+<textarea name="rating-cons" id="ratingCons" cols="30" rows="10" placeholder="What were the cons?"></textarea>
+
+<br>
+<button type="submit" id="submit-meal">Submit</button>
+
