@@ -1,5 +1,6 @@
 $(document).on("click", "#search-submit", function(event){
     event.preventDefault();
+    alert("submit pressed");
 
     var search = $("#search-restaurant").val().trim();
 
