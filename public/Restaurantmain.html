@@ -64,7 +64,13 @@
                 </form>
             </div>
         </div>
-
+        <header>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3" style="float:right">
+                  <h2>Welcome <span class="member-name"></span></h2>
+                </div>
+              </div>
+        </header>
         <div class="input-group" id="search-form">
             <input type="text" class="form-control" aria-label="...">
             <div class="input-group-btn">
@@ -116,14 +122,15 @@
             <li role="presentation"><a class="navLinks" id="findAMeal"> Find a Meal </a></li>
             <li role="presentation"><a class="navLinks" id="MyResturant"> My Resturants </a></li>
             <li role="presentation"><a class="navLinks" id="MyMeals"> My Meals </a></li>
-            <li role="presentation"><a class="navLinks" id="LogIn"> Log In </a></li>
-            <li role="presentation"><a class="navLinks" id="SignUp"> Sign Up </a></li>
+            <li role="presentation"><a href="/login" class="navLinks" id="LogIn"> Log In </a></li>
+            <li role="presentation"><a href="/signup" class="navLinks" id="SignUp"> Sign Up </a></li>
         </ul>
     </nav>
 
     <div class="container-fluid">
     </div>
     </div>
+    
 
     <div class="container">
         <div class="row">
@@ -194,4 +201,6 @@
     </div>
     </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>  
 </body>

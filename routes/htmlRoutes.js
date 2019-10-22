@@ -3,8 +3,26 @@ var path = require("path");
 var db = require("../models");
 
 module.exports = function (app) {
+    app.get("/signup", function(req,res){
+        if(req.user){
+            res.redirect("/main");
+        }
+        res.sendFile(path.join(__dirname, "../public/signup.html"))
+    });
+
+    app.get("/login", function(req,res){
+        if(req.user){
+            res.redirect("/main");
+        }
+        res.sendFile(path.join(__dirname, "../public/login.html"))
+    });
+
+    app.get("/main", function(req, res){
+        res.render("index")
+    })
+
     app.get("/", function (req, res) {
-        res.render("index", { name: "something" });
+        res.sendFile(path.join(__dirname, "../public/index.html"))
     })
 
     app.get("/addRestaurant", function (req, res) {
@@ -75,6 +93,21 @@ module.exports = function (app) {
         }).then(function(data){
             res.render("mealRatings", {
                 meals: data
+            })
+        })
+    })
+
+    app.get("/restaurantInfo/:restaurant", function(req, res){
+        db.Restaurant.findAll({
+            where: {
+                restaurant_name: req.params.restaurant
+            },
+            include: [db.Meal, db.Ratings]
+        }).then(function(data){
+            var data = data[0].dataValues
+            console.log(data.Ratings)
+            res.render("restaurantInfo", {
+                restaurantinfo: data
             })
         })
     })
