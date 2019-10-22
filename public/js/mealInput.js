@@ -11,7 +11,7 @@ $(document).on("click", "#submit-meal", function(event){
     };
     console.log(newMeal);
 
-    $.post("/api/addMeal", newMeal).then(function(){
-        window.location.replace("/allRestaurants");
+    $.post("/api/addMeal", newMeal).then(function(data){
+        window.location.replace("/restaurantInfo/" + data.RestaurantId);
     })
 })
