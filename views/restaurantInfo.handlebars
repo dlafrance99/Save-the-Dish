@@ -1,0 +1,26 @@
+<h1>{{restaurantinfo.restaurant_name}}</h1>
+<h3>{{restaurantinfo.city}}, {{restaurantinfo.state}}</h3>
+
+<div class="restaurantRatings">
+    
+    <h4>Restaurant Reviews</h4>
+    <ul>
+        {{#each restaurantinfo.Ratings}}
+        <li>
+            rating: {{rating}}
+            <p>
+                comment: {{comment}}
+            </p>
+
+        </li>
+
+        {{/each}}
+    </ul>
+
+    <h4>Menu Items</h4>
+    <ul>
+        {{#each restaurantinfo.Meals}}
+        <li>{{menu_item}}</li>
+        {{/each}}
+    </ul>
+</div>
