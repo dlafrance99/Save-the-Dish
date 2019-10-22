@@ -1,13 +1,12 @@
 $(document).on("click", "#search-submit", function(event){
     event.preventDefault();
-    alert("submit pressed");
 
     var search = $("#search-restaurant").val().trim();
 
     console.log(search);
 
     $.get("/searchRestaurant/" + search, function(){
-        window.location.replace("/allRestaurants/" + search);
+        window.location.replace("/searchRestaurant/" + search);
     })
 })
 
