@@ -5,7 +5,7 @@
 <ol>
     {{#each restaurants}}
     <li id="restaurant">
-        <a href="/restaurantInfo/{{this.restaurant_name}}">{{this.restaurant_name}}</a>
+        <a href="/restaurantInfo/{{this.id}}">{{this.restaurant_name}}</a>
     </li>
 
     <p>{{this.city}}, {{this.state}}</p>
@@ -19,13 +19,3 @@
 </a>
 </h3>
 
-
-
-
-<button data-name="{{this.restaurant_name}}" data-id="{{this.id}}" id="rateRestaurant">Rate this Restaurant</button>
-<button id="RateMeal" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Rate a meal from this
-    restaurant</button>
-<button id="allRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this
-    restaurant</button>
-<button id="allMealRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this
-    restaurant</button>

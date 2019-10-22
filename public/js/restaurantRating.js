@@ -7,10 +7,10 @@ $(document).on("click", "#resRating-submit", function(event){
         comment: $("#restaurantComment").val().trim()
     };
 
-    console.log(`this is the new rating: ${newRating}`);
+    // console.log(`this is the new rating: ${newRating}`);
 
-    $.post("/api/addResRating", newRating).then(function(){
-        window.location.replace("/allRestaurants")
+    $.post("/api/addResRating", newRating).then(function(data){
+        window.location.href = `/restaurantInfo/${data.RestaurantId}`
     })
 
 })

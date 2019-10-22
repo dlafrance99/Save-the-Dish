@@ -65,6 +65,30 @@ module.exports = function (app) {
         })
     })
 
+    app.get("/searchRestaurant/city/:city", function(req, res){
+        db.Restaurant.findAll({
+            where: {
+                city: req.params.city
+            }
+        }).then(function(data){
+            res.render("restaurantSearch", {
+                restaurants: data
+            })
+        })
+    })
+
+    app.get("/searchRestaurant/state/:state", function(req, res){
+        db.Restaurant.findAll({
+            where: {
+                state: req.params.state
+            }
+        }).then(function(data){
+            res.render("restaurantSearch", {
+                restaurants: data
+            })
+        })
+    })
+
 
     app.get("/allRestaurants", function (req, res) {
         db.Restaurant.findAll().then(function (data) {
@@ -99,15 +123,15 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/restaurantInfo/:restaurant", function(req, res){
+    app.get("/restaurantInfo/:id", function(req, res){
         db.Restaurant.findAll({
             where: {
-                restaurant_name: req.params.restaurant
+                id: req.params.id
             },
             include: [db.Meal, db.Ratings]
         }).then(function(data){
             var data = data[0].dataValues
-            console.log(data.Ratings)
+            // console.log(data.Ratings)
             res.render("restaurantInfo", {
                 restaurantinfo: data
             })
