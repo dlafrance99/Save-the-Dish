@@ -5,16 +5,18 @@ var db = require("../models");
 module.exports = function (app) {
     app.get("/signup", function(req,res){
         if(req.user){
-            res.redirect("/main");
+            req.flash("successMsg", "You're already logged in");
+            return res.redirect("/main");
         }
-        res.sendFile(path.join(__dirname, "../public/signup.html"))
+        res.render("signup")
     });
 
     app.get("/login", function(req,res){
         if(req.user){
-            res.redirect("/main");
+            req.flash("successMsg", "You're already logged in");
+            return res.redirect("/main");
         }
-        res.sendFile(path.join(__dirname, "../public/login.html"))
+        res.render("login")
     });
 
     app.get("/main", function(req, res){
