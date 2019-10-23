@@ -1,57 +1,78 @@
 var path = require("path");
-
+var requireLogin = require("../config/middleware/isAuthenticated")
 var db = require("../models");
 
 module.exports = function (app) {
-    app.get("/signup", function(req,res){
-        if(req.user){
-            res.redirect("/main");
+    app.get("/signup", function (req, res) {
+        if (req.user) {
+            // req.flash("successMsg", "You're already logged in");
+            return res.redirect("/main");
         }
-        res.sendFile(path.join(__dirname, "../public/signup.html"))
+        res.render("signup")
     });
 
-    app.get("/login", function(req,res){
-        if(req.user){
-            res.redirect("/main");
+    app.get("/login", function (req, res) {
+        if (req.user) {
+            req.flash("successMsg", "You're already logged in");
+            return res.redirect("/main");
         }
-        res.sendFile(path.join(__dirname, "../public/login.html"))
+        res.render("login")
     });
 
-    app.get("/main", function(req, res){
-        res.render("index")
+    app.get("/main", function (req, res) {
+        if (!req.isAuthenticated()) {
+            return res.render("index", { user: "Guest", id: "" })
+        }
+        res.render("index", {
+            user: req.user.username,
+            id: req.user.id
+        })
     })
 
     app.get("/", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/index.html"))
     })
 
-    app.get("/addRestaurant", function (req, res) {
-        res.render("addRestaurant")
+    app.get("/addRestaurant", requireLogin, function (req, res) {
+        res.render("addRestaurant", {
+            user: req.user.username,
+            id: req.user.id
+        })
     })
 
-    app.get("/addMeal/:id/:name", function(req, res){
+    app.get("/addMeal/:id/:name", function (req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect("/signup");
+        }
         var restaurantid = {
             id: req.params.id,
             name: req.params.name
         }
 
         res.render("addMeal", {
-            restaurantid
+            restaurantid,
+            user: req.user.username,
+            id: req.user.id
         })
     })
 
-    app.get("/rateRestaurant/:id/:name", function(req, res){
+    app.get("/rateRestaurant/:id/:name", function (req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect("/signup");
+        }
         var restaurantId = {
             id: req.params.id,
             name: req.params.name
         }
-        
+
         res.render("restaurantRating", {
+            id: req.user.id,
+            user: req.user.username,
             restaurantId
         });
     })
 
-    app.get("/searchRestaurant/:restaurant", function(req, res){
+    app.get("/searchRestaurant/:restaurant", function (req, res) {
         db.Restaurant.findAll({
             where: {
                 restaurant_name: req.params.restaurant
@@ -61,14 +82,14 @@ module.exports = function (app) {
                 ["city", "ASC"]
             ]
 
-        }).then(function(data){
+        }).then(function (data) {
             res.render("restaurantSearch", {
                 restaurants: data
             })
         })
     })
 
-    app.get("/searchRestaurant/city/:city", function(req, res){
+    app.get("/searchRestaurant/city/:city", function (req, res) {
         db.Restaurant.findAll({
             where: {
                 city: req.params.city
@@ -76,14 +97,14 @@ module.exports = function (app) {
             order: [
                 ["restaurant_name", "ASC"],
             ]
-        }).then(function(data){
+        }).then(function (data) {
             res.render("restaurantSearch", {
                 restaurants: data
             })
         })
     })
 
-    app.get("/searchRestaurant/state/:state", function(req, res){
+    app.get("/searchRestaurant/state/:state", function (req, res) {
         db.Restaurant.findAll({
             where: {
                 state: req.params.state
@@ -91,7 +112,7 @@ module.exports = function (app) {
             order: [
                 ["restaurant_name", "ASC"],
             ]
-        }).then(function(data){
+        }).then(function (data) {
             res.render("restaurantSearch", {
                 restaurants: data
             })
@@ -111,28 +132,30 @@ module.exports = function (app) {
         db.Ratings.findAll({
             where: {
                 RestaurantId: req.params.id
-            }
-        }).then(function(data){
+            },
+            include: [db.User]
+        }).then(function (data) {
             res.render("restaurantSpecificRatings", {
                 ratings: data
             });
         })
-        
+
     })
 
-    app.get("/mealRatings/:id/", function(req, res){
+    app.get("/mealRatings/:id/", function (req, res) {
         db.Meal.findAll({
             where: {
                 RestaurantId: req.params.id
             }
-        }).then(function(data){
+        }).then(function (data) {
             res.render("mealRatings", {
                 meals: data
             })
         })
     })
 
-    app.get("/restaurantInfo/:id", function(req, res){
+    app.get("/restaurantInfo/:id?", function (req, res) {
+        console.log(req.params.id)
         db.Restaurant.findAll({
             where: {
                 id: req.params.id
@@ -142,27 +165,52 @@ module.exports = function (app) {
                 [db.Ratings, "createdAt", "DESC"],
                 [db.Meal, "createdAt", "DESC"]
             ]
-        }).then(function(data){
-            var data = data[0].dataValues
+        }).then(function (data) {
+            var restaurantData = data[0].dataValues
             var averageRating;
-            if(data.Ratings.length === 0){
+            if (restaurantData.Ratings.length === 0) {
                 averageRating = "No Reviews Yet"
             } else {
                 var totalRating = 0;
-                for (var i=0; i<data.Ratings.length; i++){
-                    var ratings = data.Ratings[i].dataValues.rating;
-                   
+                for (var i = 0; i < restaurantData.Ratings.length; i++) {
+                    var ratings = restaurantData.Ratings[i].dataValues.rating;
+
                     totalRating += ratings
                 }
-    
-                averageRating = totalRating/data.Ratings.length;
+
+                averageRating = totalRating / restaurantData.Ratings.length;
             }
-            data.average = averageRating;
+            restaurantData.average = averageRating;
             res.render("restaurantInfo", {
-                restaurantinfo: data
+                restaurantData
+            })
+        })
+    })
+
+    app.get("/myReviews", function (req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect("/signup");
+        }
+        db.User.findAll({
+            where: {
+                id: req.user.id
+            },
+            include: [{ model: db.Ratings, include: [db.Restaurant] }]
+        }).then(function (data) {
+            console.log(data[0].dataValues.Ratings[7])
+            const reviewData = data[0].dataValues
+            // res.json(data)
+            res.render("userRatings", {
+                reviewData,
+                user: req.user.username,
+                id: req.user.id
             })
         })
     })
 }
+
+
+
+
 
 

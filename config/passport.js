@@ -13,13 +13,9 @@ function(email, password, done){
         }
     }).then(function(dbUser){
         if(!dbUser){
-            return done(null, false, {
-                message: "Incorrect email"
-            });
+            return done(null, false, { message: "No matching email" });
         } else if (!dbUser.validPassword(password)){
-            return done(null, false, {
-                message: "Incorrect password"
-            });
+            return done(null, false, { message: "Incorrect password" });
         }
         return done(null, dbUser);
         })
@@ -27,6 +23,7 @@ function(email, password, done){
 ));
 
 passport.serializeUser(function(user,cb){
+    console.log(user)
     cb(null, user);
 })
 

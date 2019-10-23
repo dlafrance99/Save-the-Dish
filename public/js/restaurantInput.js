@@ -23,7 +23,6 @@ $(document).on("click", "#submit-restaurant", function(event){
     
     
     $.post("/api/addRestaurant", newRestaurant).then(function(data){
-        window.location.replace("/restaurantInfo/" + data.id);
-        
+        window.location.replace("/restaurantInfo/" + data.id);  
     })
 })

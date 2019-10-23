@@ -1,0 +1,20 @@
+<h2>My Reviews</h2>
+
+<div class="clearfix">
+
+    <div class="restaurantRatings">
+
+        <h3>Restaurant Ratings</h3>
+        <ul>
+            {{#each reviewData.Ratings}}
+            <hr class="restaurantSplit">
+            <li>
+               <h4 class="resRatingName inline">Restaurant: {{Restaurant.restaurant_name}}</h4> <h6 class="inline">({{Restaurant.city}}, {{Restaurant.state}})</h6>
+                <h5>Rating: {{rating}}</h5>
+                <h5>Comment: {{comment}}</h5>
+            </li>
+            {{/each}}
+        </ul>
+
+    </div>
+</div>

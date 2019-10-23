@@ -101,6 +101,14 @@ p{
 	margin-bottom: 20px;
 }
 
+.resRatingName {
+	font-size: 2rem;
+}
+
+.inline {
+	display: inline;
+}
+
 .restaurantRatings {
 	background-color: #000044;
 	padding: 10px;

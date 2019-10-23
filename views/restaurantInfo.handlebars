@@ -1,16 +1,16 @@
 
-<button id="RateMeal" data-id="{{restaurantinfo.id}}" data-name="{{restaurantinfo.restaurant_name}}"
+<button id="RateMeal" data-id="{{restaurantData.id}}" data-name="{{restaurantData.restaurant_name}}"
     class="resInfoButt">Rate a meal </button>
 
 
-<button data-name="{{restaurantinfo.restaurant_name}}" data-id="{{restaurantinfo.id}}" id="rateRestaurant"
+<button data-name="{{restaurantData.restaurant_name}}" data-id="{{restaurantData.id}}" id="rateRestaurant"
     class="resInfoButt">Rate this Restaurant</button>
 
 
-<h1>{{restaurantinfo.restaurant_name}}</h1>
-<h3>{{restaurantinfo.city}}, {{restaurantinfo.state}}</h3>
+<h1>{{restaurantData.restaurant_name}}</h1>
+<h3>{{restaurantData.city}}, {{restaurantData.state}}</h3>
 
-<h4>Average Rating: {{restaurantinfo.average}}</h4>
+<h4>Average Rating: {{restaurantData.average}}</h4>
 
 
 <div class="clearfix">
@@ -18,10 +18,8 @@
     <div class="restaurantRatings">
 
         <h4>Restaurant Reviews</h4>
-
-
         <ul>
-            {{#each restaurantinfo.Ratings}}
+            {{#each restaurantData.Ratings}}
             <hr class="restaurantSplit">
             <li>Rating: {{rating}}</li>
             <p>Comment: {{comment}}</p>
@@ -33,7 +31,7 @@
     <div class="menuRatings">
         <h4>Menu Reviews</h4>
         <ul>
-            {{#each restaurantinfo.Meals}}
+            {{#each restaurantData.Meals}}
             <hr class="restaurantSplit">
             <li>{{this.menu_item}}</li>
             <p>Rating: {{this.rating}}</p>
