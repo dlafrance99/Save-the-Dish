@@ -1,6 +1,6 @@
 module.exports = function(req, res, next){
-    if(req.user){
-        return next ();
+    if(!req.user){
+        return res.redirect("/signup")
     }
-    return res.redirect("/")
+   next()
 }

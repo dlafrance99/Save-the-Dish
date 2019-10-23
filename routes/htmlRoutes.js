@@ -1,52 +1,73 @@
 var path = require("path");
-
+var requireLogin = require("../config/middleware/isAuthenticated")
 var db = require("../models");
 
 module.exports = function (app) {
     app.get("/signup", function(req,res){
         if(req.user){
-            res.redirect("/main");
+            // req.flash("successMsg", "You're already logged in");
+            return res.redirect("/main");
         }
-        res.sendFile(path.join(__dirname, "../public/signup.html"))
+        res.render("signup")
     });
 
     app.get("/login", function(req,res){
         if(req.user){
-            res.redirect("/main");
+            req.flash("successMsg", "You're already logged in");
+            return res.redirect("/main");
         }
-        res.sendFile(path.join(__dirname, "../public/login.html"))
+        res.render("login")
     });
 
     app.get("/main", function(req, res){
-        res.render("index")
+        if(!req.isAuthenticated()){
+            return res.render("index", {user: "Guest", id:""})
+        }
+        res.render("index", {
+            user: req.user.username,
+            id: req.user.id
+        })
     })
 
     app.get("/", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/index.html"))
     })
 
-    app.get("/addRestaurant", function (req, res) {
-        res.render("addRestaurant")
+    app.get("/addRestaurant", requireLogin, function (req, res) {
+        res.render("addRestaurant", {
+            user: req.user.username,
+            id: req.user.id
+        })
     })
 
     app.get("/addMeal/:id/:name", function(req, res){
+        if(!req.isAuthenticated()){
+            return res.redirect("/signup");
+        }
         var restaurantid = {
             id: req.params.id,
             name: req.params.name
         }
 
         res.render("addMeal", {
-            restaurantid
+            restaurantid,
+            user: req.user.username,
+            id: req.user.id
         })
     })
 
     app.get("/rateRestaurant/:id/:name", function(req, res){
+        if(!req.isAuthenticated()){
+            return res.redirect("/signup");
+        }
         var restaurantId = {
             id: req.params.id,
             name: req.params.name
         }
         
         res.render("restaurantRating", {
+            id: req.user.id,
+            user: req.user.username,
             restaurantId
         });
     })
@@ -111,7 +132,8 @@ module.exports = function (app) {
         db.Ratings.findAll({
             where: {
                 RestaurantId: req.params.id
-            }
+            },
+            include: [db.User]
         }).then(function(data){
             res.render("restaurantSpecificRatings", {
                 ratings: data
@@ -132,7 +154,8 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/restaurantInfo/:id", function(req, res){
+    app.get("/restaurantInfo/:id?", function(req, res){
+        console.log(req.params.id)
         db.Restaurant.findAll({
             where: {
                 id: req.params.id
@@ -143,13 +166,38 @@ module.exports = function (app) {
                 [db.Meal, "createdAt", "DESC"]
             ]
         }).then(function(data){
-            var data = data[0].dataValues
-            // console.log(data.Ratings)
-            res.render("restaurantInfo", {
-                restaurantinfo: data
+            const restaurantData = data[0].dataValues;
+            res.render('restaurantInfo', {
+                restaurantData,
+            })
+
+        })
+    })
+
+    app.get("/myReviews", function(req,res){
+        if(!req.isAuthenticated()){
+            return res.redirect("/signup");
+        }
+        db.User.findAll({
+            where: {
+                id: req.user.id
+            },
+            include: [{model: db.Ratings, include: [db.Restaurant]} ]
+        }).then(function(data){
+            console.log(data[0].dataValues.Ratings[7])
+            const reviewData = data[0].dataValues
+            // res.json(data)
+            res.render("userRatings", {
+                reviewData,
+                user: req.user.username,
+                id: req.user.id
             })
         })
     })
 }
+
+
+
+
 
 

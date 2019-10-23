@@ -9,6 +9,7 @@ module.exports = function(app) {
     app.post("/api/signup", function(req,res){
         console.log(req.body);
         db.User.create({
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         }).then(function(){
@@ -16,6 +17,12 @@ module.exports = function(app) {
         }).catch(function(err){
             console.log(err);
             res.json(err);
+        })
+    });
+
+    app.get("/api/signup", function(req, res){
+        db.User.findAll().then(function(result) {
+            return res.json(result);
         })
     });
 
@@ -29,9 +36,21 @@ module.exports = function(app) {
             res.json({});
         } else {
             res.json({
+                username: req.user.username,
                 email: req.user.email,
                 id: req.user.id
             });
         }
     });
+
+    app.get("/api/user/:id", function(req, res){
+        db.User.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [db.Ratings]
+        }).then(function(dbUser){
+            res.json(dbUser)
+        })
+    })
 }
