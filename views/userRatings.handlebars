@@ -18,3 +18,16 @@
 
     </div>
 </div>
+
+
+<ul>
+    {{#each reviewData.Meals}}
+    <li>
+        Restaurant: {{restaurant}}
+        Meal: {{menu_item}}
+        Rating: {{rating}}
+        Pros: {{pros}}
+        Cons: {{cons}}
+    </li>
+    {{/each}}
+</ul>

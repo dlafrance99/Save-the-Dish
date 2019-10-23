@@ -12,7 +12,7 @@ body {
 #title {
   left: calc(43% - 240px);
   position: absolute;
-  top: 56px;
+  top: -15px;
   font-size: 65px;
   color:white;
   font-weight: bold;
@@ -323,4 +323,8 @@ a#footer {
   padding: 10px;
   text-decoration: none;
   color: white !important;
+}
+
+.dropdown-menu {
+  color: maroon;
 }
