@@ -10,7 +10,7 @@ body {
 */}
 
 #title {
-  left: calc(50% - 240px);
+  left: calc(43% - 240px);
   position: absolute;
   top: 56px;
   font-size: 65px;
@@ -223,7 +223,7 @@ a:hover {
   bottom: 20px;
   display: block;
   margin: 0 auto;
-  width: 88%;
+  width: 80%;
 }
 
 .tile0, .tile5, .tile10, .tile15 {
