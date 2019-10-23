@@ -17,17 +17,23 @@
         </ul>
 
     </div>
-</div>
 
+<div class="menuRatings">
+
+<h3>Meal Ratings</h3>
 
 <ul>
     {{#each reviewData.Meals}}
+    <hr class="restaurantSplit">
     <li>
-        Restaurant: {{restaurant}}
-        Meal: {{menu_item}}
-        Rating: {{rating}}
-        Pros: {{pros}}
-        Cons: {{cons}}
+       <h4 class="resRatingName inline">Restaurant: {{restaurant}}</h4>
+       <h4>Meal: {{menu_item}}</h4>
+       <h5>Rating: {{rating}}</h5>
+       <h5>Pros: {{pros}}</h5>
+       <h5>Cons: {{cons}}</h5>
     </li>
     {{/each}}
+</div>
 </ul>
+
+</div>
