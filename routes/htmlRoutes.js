@@ -144,7 +144,20 @@ module.exports = function (app) {
             ]
         }).then(function(data){
             var data = data[0].dataValues
-            // console.log(data.Ratings)
+            var averageRating;
+            if(data.Ratings.length === 0){
+                averageRating = "No Reviews Yet"
+            } else {
+                var totalRating = 0;
+                for (var i=0; i<data.Ratings.length; i++){
+                    var ratings = data.Ratings[i].dataValues.rating;
+                   
+                    totalRating += ratings
+                }
+    
+                averageRating = totalRating/data.Ratings.length;
+            }
+            data.average = averageRating;
             res.render("restaurantInfo", {
                 restaurantinfo: data
             })

@@ -54,6 +54,10 @@ body {
 	margin-top: 20px;
 }
 
+#resRatingAvg {
+	width: 50vw;
+}
+
 #submit-meal {
 	background-color: #000044;
 	border: none;
