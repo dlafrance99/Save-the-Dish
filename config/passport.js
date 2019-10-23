@@ -23,6 +23,7 @@ function(email, password, done){
 ));
 
 passport.serializeUser(function(user,cb){
+    console.log(user)
     cb(null, user);
 })
 

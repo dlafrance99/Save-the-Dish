@@ -14,11 +14,11 @@ module.exports = function(sequelize, DataTypes){
                 allowNull: false
             }
         }),
-        Ratings.belongsTo(models.User), {
+        Ratings.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
-        }
+        })
     }
 
     return Ratings

@@ -20,7 +20,9 @@ module.exports = function (app) {
     });
 
     app.get("/main", function(req, res){
-        res.render("index")
+        res.render("index", {
+            user: req.user.username
+        })
     })
 
     app.get("/", function (req, res) {
@@ -49,6 +51,8 @@ module.exports = function (app) {
         }
         
         res.render("restaurantRating", {
+            id: req.user.id,
+            user: req.user.username,
             restaurantId
         });
     })
@@ -60,7 +64,8 @@ module.exports = function (app) {
             }
         }).then(function(data){
             res.render("restaurantSearch", {
-                restaurants: data
+                restaurants: data,
+                user: req.user.id
             })
         })
     })
@@ -102,7 +107,8 @@ module.exports = function (app) {
         db.Ratings.findAll({
             where: {
                 RestaurantId: req.params.id
-            }
+            },
+            include: [db.User]
         }).then(function(data){
             res.render("restaurantSpecificRatings", {
                 ratings: data
@@ -123,7 +129,8 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/restaurantInfo/:id", function(req, res){
+    app.get("/restaurantInfo/:id?", function(req, res){
+        console.log(req.params.id)
         db.Restaurant.findAll({
             where: {
                 id: req.params.id
@@ -134,6 +141,19 @@ module.exports = function (app) {
             // console.log(data.Ratings)
             res.render("restaurantInfo", {
                 restaurantinfo: data
+            })
+        })
+    })
+
+    app.get("/myReviews", function(req,res){
+        db.User.findAll({
+            where: {
+                id: req.user.id
+            },
+            include: [db.Ratings]
+        }).then(function(data){
+            res.render("userRatings", {
+                ratings: userRatings
             })
         })
     })

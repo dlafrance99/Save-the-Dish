@@ -9,9 +9,10 @@ var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
 var app = express()
+
+app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use(express.static("public"))
 app.use(session({
     secret: "keyboard cat",
     resave: true,
