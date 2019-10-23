@@ -1,9 +1,10 @@
 <h2>My Reviews</h2>
 <ul>
-    {{#each ratings}}
+    {{#each reviewData.Ratings}}
     <li>
-        Rating: {{this.rating}}
-        comment: {{this.comment}}
+        Rating: {{rating}}
+        comment: {{comment}}
+        Restaurant: {{Restaurant.restaurant_name}}
     </li>
     {{/each}}
 </ul>

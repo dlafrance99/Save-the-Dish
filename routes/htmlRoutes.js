@@ -1,11 +1,11 @@
 var path = require("path");
-
+var requireLogin = require("../config/middleware/isAuthenticated")
 var db = require("../models");
 
 module.exports = function (app) {
     app.get("/signup", function(req,res){
         if(req.user){
-            req.flash("successMsg", "You're already logged in");
+            // req.flash("successMsg", "You're already logged in");
             return res.redirect("/main");
         }
         res.render("signup")
@@ -33,10 +33,7 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../public/index.html"))
     })
 
-    app.get("/addRestaurant", function (req, res) {
-        if(!req.isAuthenticated()){
-            return res.redirect("/signup");
-        }
+    app.get("/addRestaurant", requireLogin, function (req, res) {
         res.render("addRestaurant", {
             user: req.user.username,
             id: req.user.id
@@ -76,19 +73,6 @@ module.exports = function (app) {
     })
 
     app.get("/searchRestaurant/:restaurant", function(req, res){
-        if(!req.isAuthenticated()){
-            db.Restaurant.findAll({
-                where: {
-                    restaurant_name: req.params.restaurant
-                }
-            }).then(function(data){
-                return res.render("restaurantSearch", {
-                    restaurants: data,
-                    user: "Guest",
-                    id: ""
-                })
-            })
-        }
         db.Restaurant.findAll({
             where: {
                 restaurant_name: req.params.restaurant
@@ -100,27 +84,12 @@ module.exports = function (app) {
 
         }).then(function(data){
             res.render("restaurantSearch", {
-                restaurants: data,
-                user: req.user.username,
-                id: req.user.id
+                restaurants: data
             })
         })
     })
 
     app.get("/searchRestaurant/city/:city", function(req, res){
-        if(!req.isAuthenticated()){
-            db.Restaurant.findAll({
-                where: {
-                    city: req.params.city
-                }
-            }).then(function(data){
-                return res.render("restaurantSearch", {
-                    restaurants: data,
-                    user: "Guest",
-                    id: ""
-                })
-            })
-        }
         db.Restaurant.findAll({
             where: {
                 city: req.params.city
@@ -130,27 +99,12 @@ module.exports = function (app) {
             ]
         }).then(function(data){
             res.render("restaurantSearch", {
-                restaurants: data,
-                user: req.user.username,
-                id: req.user.id
+                restaurants: data
             })
         })
     })
 
     app.get("/searchRestaurant/state/:state", function(req, res){
-        if(!req.isAuthenticated()){
-            db.Restaurant.findAll({
-                where: {
-                    city: req.params.state
-                }
-            }).then(function(data){
-                return res.render("restaurantSearch", {
-                    restaurants: data,
-                    user: "Guest",
-                    id: ""
-                })
-            })
-        }
         db.Restaurant.findAll({
             where: {
                 state: req.params.state
@@ -160,48 +114,21 @@ module.exports = function (app) {
             ]
         }).then(function(data){
             res.render("restaurantSearch", {
-                restaurants: data,
-                user: req.user.username,
-                id: req.user.id
+                restaurants: data
             })
         })
     })
 
 
     app.get("/allRestaurants", function (req, res) {
-        if(!req.isAuthenticated()){
-            db.Restaurant.findAll().then(function (data) {
-               return res.render("restaurantSearch", {
-                    restaurants: data,
-                    user: "Guest",
-                    id: ""
-                })
-            })
-        }
         db.Restaurant.findAll().then(function (data) {
             res.render("restaurantSearch", {
-                restaurants: data,
-                user: req.user.username,
-                id: req.user.id
+                restaurants: data
             })
         })
     })
 
     app.get("/restaurantRatings/:id", function (req, res) {
-        if(!req.isAuthenticated()){
-            db.Ratings.findAll({
-                where: {
-                    RestaurantId: req.params.id
-                },
-                include: [db.User]
-            }).then(function(data){
-                return res.render("restaurantSpecificRatings", {
-                    ratings: data,
-                    user: "Guest",
-                    id: ""
-                });
-            })
-        }
         db.Ratings.findAll({
             where: {
                 RestaurantId: req.params.id
@@ -209,59 +136,26 @@ module.exports = function (app) {
             include: [db.User]
         }).then(function(data){
             res.render("restaurantSpecificRatings", {
-                ratings: data,
-                user: req.user.username,
-                id: req.user.id
+                ratings: data
             });
         })
         
     })
 
     app.get("/mealRatings/:id/", function(req, res){
-        if(!req.isAuthenticated()){
-            db.Meal.findAll({
-                where: {
-                    RestaurantId: req.params.id
-                }
-            }).then(function(data){
-                res.render("mealRatings", {
-                    meals: data,
-                    user: "Guest",
-                    id: ""
-                })
-            })
-        }
         db.Meal.findAll({
             where: {
                 RestaurantId: req.params.id
             }
         }).then(function(data){
             res.render("mealRatings", {
-                meals: data,
-                user: req.user.username,
-                id: req.user.id
+                meals: data
             })
         })
     })
 
     app.get("/restaurantInfo/:id?", function(req, res){
         console.log(req.params.id)
-        if(!req.isAuthenticated()){
-            db.Restaurant.findAll({
-                where: {
-                    id: req.params.id
-                },
-                include: [db.Meal, db.Ratings]
-            }).then(function(data){
-                var data = data[0].dataValues
-                // // console.log(data.Ratings)
-                return res.render("restaurantInfo", {
-                    restaurantinfo: data,
-                    user: "Guest",
-                    id: ""
-                })
-            })
-        }
         db.Restaurant.findAll({
             where: {
                 id: req.params.id
@@ -272,12 +166,11 @@ module.exports = function (app) {
                 [db.Meal, "createdAt", "DESC"]
             ]
         }).then(function(data){
-            var data = data[0].dataValues
-            res.render("restaurantInfo", {
-                restaurantinfo: data,
-                user: req.user.username,
-                id: req.user.id
+            const restaurantData = data[0].dataValues;
+            res.render('restaurantInfo', {
+                restaurantData,
             })
+
         })
     })
 
@@ -289,10 +182,13 @@ module.exports = function (app) {
             where: {
                 id: req.user.id
             },
-            include: [db.Ratings]
+            include: [{model: db.Ratings, include: [db.Restaurant]} ]
         }).then(function(data){
+            console.log(data[0].dataValues.Ratings[7])
+            const reviewData = data[0].dataValues
+            // res.json(data)
             res.render("userRatings", {
-                ratings: data,
+                reviewData,
                 user: req.user.username,
                 id: req.user.id
             })
