@@ -92,7 +92,12 @@ module.exports = function (app) {
         db.Restaurant.findAll({
             where: {
                 restaurant_name: req.params.restaurant
-            }
+            },
+            order: [
+                ["state", "ASC"],
+                ["city", "ASC"]
+            ]
+
         }).then(function(data){
             res.render("restaurantSearch", {
                 restaurants: data,
@@ -119,7 +124,10 @@ module.exports = function (app) {
         db.Restaurant.findAll({
             where: {
                 city: req.params.city
-            }
+            },
+            order: [
+                ["restaurant_name", "ASC"],
+            ]
         }).then(function(data){
             res.render("restaurantSearch", {
                 restaurants: data,
@@ -146,7 +154,10 @@ module.exports = function (app) {
         db.Restaurant.findAll({
             where: {
                 state: req.params.state
-            }
+            },
+            order: [
+                ["restaurant_name", "ASC"],
+            ]
         }).then(function(data){
             res.render("restaurantSearch", {
                 restaurants: data,
@@ -255,7 +266,11 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            include: [db.Meal, db.Ratings]
+            include: [db.Meal, db.Ratings],
+            order: [
+                [db.Ratings, "createdAt", "DESC"],
+                [db.Meal, "createdAt", "DESC"]
+            ]
         }).then(function(data){
             var data = data[0].dataValues
             res.render("restaurantInfo", {

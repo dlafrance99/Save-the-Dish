@@ -1,6 +1,5 @@
 html, body {
     height: 100%;
-    margin: 0;
 }
 
 
@@ -165,7 +164,8 @@ animation:headerText 3s infinite;
 
 #nameInput,
 textarea {
-    width: 250px;
+    width: 50%;
+    height: 75px;
     border: 1px solid #ccc;
     padding: 10px;
     display: inline-block;

@@ -27,13 +27,123 @@ body {
     background: #000044;
     font-weight: 300;
     font-size: 15px;
-    color: #333;
+    color: rgb(255, 255, 255);
     overflow: scroll;
-    overflow-x: hidden;
+	overflow-x: hidden;
+}
+
+.views {
+	width: 80vw;
+	margin: auto;
+	background-color: maroon;
+	padding: 10px;
+	margin-top: 2vw;
+	border-radius: 10px;
+	padding-left: 3vw;
+	padding-right: 3vw;
+	padding-bottom: 3vw;
+}
+
+.resInfoButt {
+	background-color: #000044;
+	border: none;
+	border-radius: 10px;
+	padding: 5px 10px;
+	float: right;
+	margin: 10px;
+	margin-top: 20px;
+}
+
+#submit-meal {
+	background-color: #000044;
+	border: none;
+	border-radius: 10px;
+	padding: 5px 10px;
+	margin: 10px;
+}
+
+p{
+	margin-top: 10px;
+}
+
+.panel {
+	border: none;
+}
+
+.panel-body{
+	background-color: maroon;
+}
+
+#resRating-submit {
+	background-color: #000044;
+	border: none;
+	border-radius: 10px;
+	padding: 5px 10px;
+	margin: 10px;
+}
+
+.search-submit {
+	background-color: #000044;
+	border: none;
+	border-radius: 10px;
+	padding: 5px 10px;
+	margin: 10px;
+}
+
+.restaurantSplit {
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.restaurantRatings {
+	background-color: #000044;
+	padding: 10px;
+	padding-left: 2vw;
+	border-radius: 10px;
+	margin-top: 20px;
+	width: 35vw;
+	float: left;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+input {
+	color: black;
+	margin-left: 10px;
+	border: none;
+	border-radius: 5px;
+	width: 50%;
+	padding: 5px 10px;
+}
+
+textarea {
+	color: black;
+	margin-left: 10px;
+	border: none;
+	border-radius: 5px;
+}
+
+select {
+	color: black;
+	margin-left: 10px;
+}
+
+.menuRatings {
+	background-color: #000044;
+	padding: 10px;
+	padding-left: 2vw;
+	border-radius: 10px;
+	margin-top: 20px;
+	width: 35vw;
+	float: right;
 }
 
 a {
-	color: #555;
+	color: rgb(255, 255, 255);
 	text-decoration: none;
 }
 
