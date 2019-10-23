@@ -1,22 +1,39 @@
 <h2>My Reviews</h2>
-<ul>
-    {{#each reviewData.Ratings}}
-    <li>
-        Rating: {{rating}}
-        comment: {{comment}}
-        Restaurant: {{Restaurant.restaurant_name}}
-    </li>
-    {{/each}}
-</ul>
+
+<div class="clearfix">
+
+    <div class="restaurantRatings">
+
+        <h3>Restaurant Ratings</h3>
+        <ul>
+            {{#each reviewData.Ratings}}
+            <hr class="restaurantSplit">
+            <li>
+               <h4 class="resRatingName inline">Restaurant: {{Restaurant.restaurant_name}}</h4> <h6 class="inline">({{Restaurant.city}}, {{Restaurant.state}})</h6>
+                <h5>Rating: {{rating}}</h5>
+                <h5>Comment: {{comment}}</h5>
+            </li>
+            {{/each}}
+        </ul>
+
+    </div>
+
+<div class="menuRatings">
+
+<h3>Meal Ratings</h3>
 
 <ul>
     {{#each reviewData.Meals}}
+    <hr class="restaurantSplit">
     <li>
-        Restaurant: {{restaurant}}
-        Meal: {{menu_item}}
-        Rating: {{rating}}
-        Pros: {{pros}}
-        Cons: {{cons}}
+       <h4 class="resRatingName inline">Restaurant: {{restaurant}}</h4>
+       <h4>Meal: {{menu_item}}</h4>
+       <h5>Rating: {{rating}}</h5>
+       <h5>Pros: {{pros}}</h5>
+       <h5>Cons: {{cons}}</h5>
     </li>
     {{/each}}
+</div>
 </ul>
+
+</div>

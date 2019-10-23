@@ -54,6 +54,10 @@ body {
 	margin-top: 20px;
 }
 
+#resRatingAvg {
+	width: 50vw;
+}
+
 #submit-meal {
 	background-color: #000044;
 	border: none;
@@ -95,6 +99,14 @@ p{
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+
+.resRatingName {
+	font-size: 2rem;
+}
+
+.inline {
+	display: inline;
 }
 
 .restaurantRatings {

@@ -3,6 +3,26 @@ $(document).on("click", "#submit-meal", function(event){
     var userId = $("#userId").attr("data-value").trim()
     console.log(userId)
 
+    if($("#mealItem").val().trim()===""){
+        $(".error").html("<h2>You Need to Enter a Menu Item</h2>")
+        return; 
+    }
+
+    if($("#mealRating").val().trim()===""){
+        $(".error").html("<h2>You Need Give a Rating</h2>")
+        return; 
+    }
+
+    if($("#ratingPros").val().trim()===""){
+        $(".error").html("<h2>You Need Give to Give a Pro Comment</h2>")
+        return; 
+    }
+
+    if($("#ratingCons").val().trim()===""){
+        $(".error").html("<h2>You Need Give to Give a Con Comment</h2>")
+        return; 
+    }
+
     var newMeal = {
         restaurant: $("#restaurantInfo").attr("data-name"),
         meal: $("#mealItem").val().trim(),
