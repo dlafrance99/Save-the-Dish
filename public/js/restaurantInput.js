@@ -8,7 +8,8 @@ $(document).on("click", "#submit-restaurant", function(event){
     console.log(newRestaurant);
     
     
-    $.post("/api/addRestaurant", newRestaurant).then(function(){
-       window.location.replace("/allRestaurants")
+    $.post("/api/addRestaurant", newRestaurant).then(function(data){
+        window.location.replace("/restaurantInfo/" + data.id);
+        
     })
 })

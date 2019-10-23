@@ -55,7 +55,42 @@ module.exports = function (app) {
         db.Restaurant.findAll({
             where: {
                 restaurant_name: req.params.restaurant
-            }
+            },
+            order: [
+                ["state", "ASC"],
+                ["city", "ASC"]
+            ]
+
+        }).then(function(data){
+            res.render("restaurantSearch", {
+                restaurants: data
+            })
+        })
+    })
+
+    app.get("/searchRestaurant/city/:city", function(req, res){
+        db.Restaurant.findAll({
+            where: {
+                city: req.params.city
+            },
+            order: [
+                ["restaurant_name", "ASC"],
+            ]
+        }).then(function(data){
+            res.render("restaurantSearch", {
+                restaurants: data
+            })
+        })
+    })
+
+    app.get("/searchRestaurant/state/:state", function(req, res){
+        db.Restaurant.findAll({
+            where: {
+                state: req.params.state
+            },
+            order: [
+                ["restaurant_name", "ASC"],
+            ]
         }).then(function(data){
             res.render("restaurantSearch", {
                 restaurants: data
@@ -97,15 +132,19 @@ module.exports = function (app) {
         })
     })
 
-    app.get("/restaurantInfo/:restaurant", function(req, res){
+    app.get("/restaurantInfo/:id", function(req, res){
         db.Restaurant.findAll({
             where: {
-                restaurant_name: req.params.restaurant
+                id: req.params.id
             },
-            include: [db.Meal, db.Ratings]
+            include: [db.Meal, db.Ratings],
+            order: [
+                [db.Ratings, "createdAt", "DESC"],
+                [db.Meal, "createdAt", "DESC"]
+            ]
         }).then(function(data){
             var data = data[0].dataValues
-            console.log(data.Ratings)
+            // console.log(data.Ratings)
             res.render("restaurantInfo", {
                 restaurantinfo: data
             })

@@ -1,26 +1,43 @@
+<button id="RateMeal" data-id="{{restaurantinfo.id}}" data-name="{{restaurantinfo.restaurant_name}}"
+    class="resInfoButt">Rate a meal from this
+    restaurant</button>
+
+<button data-name="{{restaurantinfo.restaurant_name}}" data-id="{{restaurantinfo.id}}" id="rateRestaurant"
+    class="resInfoButt">Rate this Restaurant</button>
+
+
 <h1>{{restaurantinfo.restaurant_name}}</h1>
 <h3>{{restaurantinfo.city}}, {{restaurantinfo.state}}</h3>
 
-<div class="restaurantRatings">
-    
-    <h4>Restaurant Reviews</h4>
-    <ul>
-        {{#each restaurantinfo.Ratings}}
-        <li>
-            rating: {{rating}}
-            <p>
-                comment: {{comment}}
-            </p>
 
-        </li>
+<div class="clearfix">
 
-        {{/each}}
-    </ul>
+    <div class="restaurantRatings">
 
-    <h4>Menu Items</h4>
-    <ul>
-        {{#each restaurantinfo.Meals}}
-        <li>{{menu_item}}</li>
-        {{/each}}
-    </ul>
+        <h4>Restaurant Reviews</h4>
+
+
+        <ul>
+            {{#each restaurantinfo.Ratings}}
+            <hr class="restaurantSplit">
+            <li>Rating: {{rating}}</li>
+            <p>Comment: {{comment}}</p>
+            {{/each}}
+        </ul>
+
+    </div>
+
+    <div class="menuRatings">
+        <h4>Menu Reviews</h4>
+        <ul>
+            {{#each restaurantinfo.Meals}}
+            <hr class="restaurantSplit">
+            <li>{{this.menu_item}}</li>
+            <p>Rating: {{this.rating}}</p>
+            <p>Pros: {{this.pros}}</p>
+            <p>Cons: {{this.cons}}</p>
+            {{/each}}
+        </ul>
+
+    </div>
 </div>

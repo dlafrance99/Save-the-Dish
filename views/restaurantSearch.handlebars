@@ -2,30 +2,23 @@
     Search Results
 </h2>
 
-<ol>
-    {{#each restaurants}}
-    <li id="restaurant">
-        <a href="/restaurantInfo/{{this.restaurant_name}}">{{this.restaurant_name}}</a>
-    </li>
+{{#each restaurants}}
+<hr class="restaurantSplit" <ol>
+<a href="/restaurantInfo/{{this.id}}">
+    <h3>{{this.restaurant_name}}</h3>
+</a>
 
-    <p>{{this.city}}, {{this.state}}</p>
-    {{/each}}
+<p>{{this.city}}, {{this.state}}</p>
+
+
+{{/each}}
 </ol>
+
+<hr class="restaurantSplit">
 
 <h2>Didn't find what you were looking for?</h2>
 <h3>
-<a href="/addRestaurant">
-    submit a new restaurant
-</a>
+    <a href="/addRestaurant" class="search-submit">
+        submit a new restaurant
+    </a>
 </h3>
-
-
-
-
-<button data-name="{{this.restaurant_name}}" data-id="{{this.id}}" id="rateRestaurant">Rate this Restaurant</button>
-<button id="RateMeal" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Rate a meal from this
-    restaurant</button>
-<button id="allRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this
-    restaurant</button>
-<button id="allMealRatings" data-id="{{this.id}}" data-name="{{this.restaurant_name}}">Check Ratings from this
-    restaurant</button>
