@@ -6,7 +6,7 @@ module.exports = function(app){
         db.Ratings.create({
             rating: req.body.rating,
             comment: req.body.comment,
-            RestaurantId: req.body.restaurantId,
+            // RestaurantId: req.body.restaurantId,
             UserId: req.body.UserId
         }).then(function(data){
             res.json(data);
