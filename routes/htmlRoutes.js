@@ -182,9 +182,9 @@ module.exports = function (app) {
             where: {
                 id: req.user.id
             },
-            include: [{model: db.Ratings, include: [db.Restaurant]} ]
+            include: [{model: db.Ratings, include: [db.Restaurant]}, db.Meal]
         }).then(function(data){
-            console.log(data[0].dataValues.Ratings[7])
+            console.log(data)
             const reviewData = data[0].dataValues
             // res.json(data)
             res.render("userRatings", {
