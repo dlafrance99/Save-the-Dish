@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes){
             foreignKey: {
                 allowNull: false
             }
+        }),
+        Meal.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
         })
     }
 

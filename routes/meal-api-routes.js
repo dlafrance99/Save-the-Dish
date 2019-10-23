@@ -8,7 +8,8 @@ module.exports = function(app){
             rating: req.body.rating,
             pros: req.body.pro,
             cons: req.body.con,
-            RestaurantId: req.body.id
+            RestaurantId: req.body.id,
+            UserId: req.body.UserId
         }).then(function(data){
             res.json(data);
         })
