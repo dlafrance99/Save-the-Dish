@@ -13,13 +13,12 @@ module.exports = function(sequelize, DataTypes){
             foreignKey: {
                 allowNull: false
             }
+        }),
+        Ratings.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
         })
-        // ,
-        // Ratings.belongsTo(models.User), {
-        //     foreignKey: {
-        //         allowNull: false
-        //     }
-        // }
     }
 
     return Ratings
