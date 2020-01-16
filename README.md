@@ -15,20 +15,25 @@ Follow the link below to test out the application!
 https://enigmatic-plains-92026.herokuapp.com/
 
 
-![general layout](https://raw.githubusercontent.com/dlafrance99/Train-Scheduler/master/assets/images/Screen%20Shot%202020-01-16%20at%2012.07.29%20PM.png)
-![form Option](https://raw.githubusercontent.com/dlafrance99/Train-Scheduler/master/assets/images/Screen%20Shot%202020-01-16%20at%2012.08.03%20PM.png)
-![form results](https://raw.githubusercontent.com/dlafrance99/Train-Scheduler/master/assets/images/Screen%20Shot%202020-01-16%20at%2012.08.16%20PM.png)
+![Loading Screen](https://raw.githubusercontent.com/dlafrance99/Save-the-Dish/master/images/Screen%20Shot%202020-01-16%20at%201.41.22%20PM.png)
+![Login Screen](https://raw.githubusercontent.com/dlafrance99/Save-the-Dish/master/images/Screen%20Shot%202020-01-16%20at%201.41.31%20PM.png)
+![Search Screen](https://raw.githubusercontent.com/dlafrance99/Save-the-Dish/master/images/Screen%20Shot%202020-01-16%20at%201.41.42%20PM.png)
+![Search Results](https://raw.githubusercontent.com/dlafrance99/Save-the-Dish/master/images/Screen%20Shot%202020-01-16%20at%201.41.53%20PM.png)
+![Restaurant Screen](https://raw.githubusercontent.com/dlafrance99/Save-the-Dish/master/images/Screen%20Shot%202020-01-16%20at%201.42.01%20PM.png)
+![My Reviews](https://raw.githubusercontent.com/dlafrance99/Save-the-Dish/master/images/Screen%20Shot%202020-01-16%20at%201.42.34%20PM.png)
 
 
 ## Organization:
 
-As a simple javascript application, There are four files that alter the functionality of this application. normalize.css to normalize the styling across different web browsers, style.css to guide the layout and look of the app, javascript.js for the app logic, and index.html for formatting.
+Through use of Handlebars, javascript, html, and css we were able to organize our website through the handlebars conventions. 
 
 ## Built With
-Node.js, Javascript, ejs, Passport, jQuery, mySQL, sequelize, express.js, and Heroku deployment.
+Node.js, Javascript, ejs, Passport, jQuery, mySQL, sequelize, express.js, HandleBars and Heroku deployment.
 
 
 ## Authors
 
 * **Devon LaFrance** - (https://github.com/dlafrance99)
+* **Emma Weber** - (https://github.com/EWeb-327)
+* **Dominic-Savio Vu** - (https://github.com/dominicsaviovu)
 
